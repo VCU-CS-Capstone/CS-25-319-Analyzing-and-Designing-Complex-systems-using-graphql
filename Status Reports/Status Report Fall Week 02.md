@@ -7,7 +7,7 @@
 -  Houda Lahourz - CS - Student Team Member
 
 **Mentor:**
-- Michael Karafotis - Bank of America - Sponsor
+- Michael Karafotis - Bank of America - Sponsor 
 
 **Faculty Advisor:**
 - Thomas Gyueera - CS - Faculty Advisor
