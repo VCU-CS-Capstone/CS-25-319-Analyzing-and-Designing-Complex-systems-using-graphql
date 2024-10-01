@@ -13,8 +13,8 @@ Status Report Fall Week XX.md is a template for to copy-paste into new Status re
 |---|---|---|---|
 | Week 1 Status Report | Do team contract and repo setup | Completed team contract and repo setup | Changes to master repo that needed to be merged into our repo |
 | Week 2 Status Report | Set up meeting with Sponsor and Acquire Literature for our literature review. | Have meeting with Sponsor and Continue to acquire sources of literature surrounding our capstone. | Sponsor pushed back meeting 1 week |
-| Week 3 Status Report | | | |
-| Week 4 Status Report | | | |
+| Week 3 Status Report | Have meeting with sponsor | Had first meeting with sponsor & Acquired more literature for our literature review. | Team does not have access to foundation developed last year |
+| Week 4 Status Report | Acquire Access to last years repository, have 2nd meeting with sponsor | Obtained proposed deliverables and key points, & Acquired access to last years work. | Last years reports are not as detailed as we had hoped. |
 | Week 5 Status Report | | | |
 | Week 6 Status Report | | | |
 | Week 7 Status Report | | | |
