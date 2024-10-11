@@ -15,8 +15,8 @@ Status Report Fall Week XX.md is a template for to copy-paste into new Status re
 | Week 2 Status Report | Set up meeting with Sponsor and Acquire Literature for our literature review. | Have meeting with Sponsor and Continue to acquire sources of literature surrounding our capstone. | Sponsor pushed back meeting 1 week |
 | Week 3 Status Report | Have meeting with sponsor | Had first meeting with sponsor & Acquired more literature for our literature review. | Team does not have access to foundation developed last year |
 | Week 4 Status Report | Acquire Access to last years repository, have 2nd meeting with sponsor | Obtained proposed deliverables and key points, & Acquired access to last years work. | Last years reports are not as detailed as we had hoped. |
-| Week 5 Status Report | Submitted Project Proposal | Meet with Advisor and sponsor for next steps | None!! |
-| Week 6 Status Report | | | |
+| Week 5 Status Report | Developed First Draft of proposal | Meet with advisor and sponsor for comments, finalize Draft, and get into contact with last year's team | Last year's students are hard to reach |
+| Week 6 Status Report | Submitted Project Proposal | Meet with Advisor and sponsor for next steps | None!! |
 | Week 7 Status Report | | | |
 | Week 8 Status Report | | | |
 | Week 9 Status Report | | | |

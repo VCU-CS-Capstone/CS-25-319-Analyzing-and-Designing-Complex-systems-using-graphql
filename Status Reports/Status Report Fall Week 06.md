@@ -13,13 +13,12 @@
 - Thomas Gyueera - CS - Faculty Advisor
 
 ## 1) Accomplishments this week ##
-   - Developed First Draft of proposal
+   - Submitted Project Proposal
 
 ## 2) Milestones to be completed next week ##
-   - Meet with advisor and sponsor for comments
-   - Finalize Draft
-   - Get into contact with last year's team
+   - Meet with Advisor and sponsor for next steps
+
 ## 3) Issues, problems or concerns ##
-   - Last year's students are hard to reach   
+   - None!!   
 
 
