@@ -17,7 +17,7 @@ Status Report Fall Week XX.md is a template for to copy-paste into new Status re
 | Week 4 Status Report | Acquire Access to last years repository, have 2nd meeting with sponsor | Obtained proposed deliverables and key points, & Acquired access to last years work. | Last years reports are not as detailed as we had hoped. |
 | Week 5 Status Report | Developed First Draft of proposal | Meet with advisor and sponsor for comments, finalize Draft, and get into contact with last year's team | Last year's students are hard to reach |
 | Week 6 Status Report | Submitted Project Proposal | Meet with Advisor and sponsor for next steps | None!! |
-| Week 7 Status Report | | | |
+| Week 7 Status Report | Set up tool and re-integrate old code into our repo |Got Hasura set up, Got Auth0 set up, and Moved old code to repo | None!! |
 | Week 8 Status Report | | | |
 | Week 9 Status Report | | | |
 | Week 10 Status Report | | | |
