@@ -1,0 +1,35 @@
+header {
+  background-color: #333; /* Dark gray */
+  padding: 10px 0;
+  width: 100%;
+}
+
+nav ul.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Use flexbox layout */
+  justify-content: space-between; /* Items spaced evenly */
+}
+
+nav ul.menu li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul.menu li:last-child {
+  margin-right: 0;
+}
+
+nav ul.menu li.right {
+  margin-left: auto; /* Push right-aligned items to the right */
+}
+
+nav ul.menu li a {
+  color: #fff; /* White */
+  text-decoration: none;
+}
+
+nav ul.menu li a:hover {
+  text-decoration: underline;
+}

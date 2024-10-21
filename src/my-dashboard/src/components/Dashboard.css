@@ -1,0 +1,89 @@
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 70vh;
+  /* background-color: #ffffff; White */
+}
+.dashboard-container {
+  margin-top: 90px;
+  width: 90%; /* Adjust the width as needed */
+  padding: 10px;
+  border: 1px solid #3498db; /* Blue */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #244487; /* Dark Blue */
+}
+
+.dashboard-header {
+  background-color: #244487; /* Dark Blue */
+  font-size: medium;
+  color: white; /* White */
+}
+
+.table-container {
+  height: 450px; /* Set a fixed height for the table container */
+  max-height: 80vh; /* Set maximum height relative to viewport height */
+  overflow: auto; /* Enable scrolling */
+  background-color: #244487; /* Dark Blue */
+}
+
+.data-table {
+  border-collapse: collapse;
+  table-layout: fixed; /* Set table layout to fixed */
+}
+
+.data-table th,
+.data-table td {
+  padding: 5px 5px;
+  border: 1px solid #3498db; /* Blue */
+  overflow: hidden; /* Hide overflowing content */
+  text-overflow: ellipsis; /* Display ellipsis for overflowing content */
+}
+
+.data-table th {
+  background-color: #244487; /* Dark Blue */
+  font-weight: bold;
+  white-space: nowrap;
+  font-size: small;
+  color: white; /* White */
+}
+
+.left-align {
+  text-align: left;
+  background-color: #99b1c1; /* Light Blue */
+  font-size: small;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center; /* Adjust this value to space around */
+  margin-top: 20px;
+  /*background-color: #244487; /* Dark Blue */
+}
+
+.page-number {
+  margin-left: 30px;
+  margin-right: 30px;
+  /*background-color: #244487;  Dark Blue */
+}
+
+.btn-disabled {
+  background-color: #dddddd; /* Change the background color to gray */
+  color: #777777; /* Change the text color to a darker shade */
+  cursor: not-allowed; /* Show a not-allowed cursor when disabled */
+}
+
+.btn-disabled:hover {
+  background-color: #dddddd; /* Keep the background color gray on hover */
+  color: #777777; /* Keep the text color unchanged on hover */
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Adjust the spacing between buttons as needed */
+}
+
