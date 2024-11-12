@@ -18,9 +18,9 @@ Status Report Fall Week XX.md is a template for to copy-paste into new Status re
 | Week 5 Status Report | Developed First Draft of proposal | Meet with advisor and sponsor for comments, finalize Draft, and get into contact with last year's team | Last year's students are hard to reach |
 | Week 6 Status Report | Submitted Project Proposal | Meet with Advisor and sponsor for next steps | None!! |
 | Week 7 Status Report | Set up tool and re-integrate old code into our repo |Got Hasura set up, Got Auth0 set up, and Moved old code to repo | None!! |
-| Week 8 Status Report | | | |
-| Week 9 Status Report | | | |
-| Week 10 Status Report | | | |
+| Week 8 Status Report | Decide on Template for Poster, and Keep Researching Tableau | Found Templates for poster | None |
+| Week 9 Status Report | Finalize Poster, and Keep Researching Tableau | Decided on Template, and Got Rough Draft of Poster | None |
+| Week 10 Status Report | Work on Preliminary Design Report and Keep Researching Tableau | Finalized Poster and Compiled Questions on Preliminary Design Report | None |
 | Week 11 Status Report | | | |
 | Week 12 Status Report | | | |
 | Week 13 Status Report | | | |
