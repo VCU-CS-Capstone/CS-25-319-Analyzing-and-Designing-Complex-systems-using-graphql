@@ -14,7 +14,7 @@ import { UserRoleProvider } from './UserContext';
 
 // Auth0 configuration
 const domain = 'dev-aue4pbx1550zv4m3.us.auth0.com';
-const clientId = 'KANG9jMvm4IV5zaLlXTLBttcxrf0nlqE';
+const clientId = 'X2iJYUuZWuexN86VhBGxDSd0yl7iW8Nm';
 const audience = 'https://clean-wasp-50.hasura.app/v1/graphql'; // Hasura GraphQL endpoint
 const redirectUri = 'http://localhost:3000/';
 
