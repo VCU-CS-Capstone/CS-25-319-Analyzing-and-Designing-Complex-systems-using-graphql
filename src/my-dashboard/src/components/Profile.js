@@ -1,37 +1,46 @@
 // Profile.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useQuery, gql } from '@apollo/client';
 import { useAuth0 } from "@auth0/auth0-react";
-import { useUserRole } from '../UserContext'; // Import the context
 import './Profile.css';
 
 const Profile = () => {
-  const { user, isAuthenticated, getIdTokenClaims } = useAuth0();
-  const { setUserRole } = useUserRole(); // Access setUserRole from context
-  const [userId, setUserId] = useState(null);
-  const [userRole, setUserRoleFromState] = useState(null);
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        if (isAuthenticated) {
-          const idTokenClaims = await getIdTokenClaims();
-          const userId = idTokenClaims["http://localhost:3000/user_id"];
-          const userRole = idTokenClaims["http://localhost:3000/roles"];
-          if (userId && userRole) {
-            setUserId(userId);
-            setUserRole(userRole);
-            setUserRoleFromState(userRole); // Set userRole in the context
-          } else {
-            throw new Error('User ID or role not found in token claims');
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
+    if (!isAuthenticated) {
+      loginWithRedirect(); // Redirect to login if not authenticated
+    }
+  }, [isAuthenticated, loginWithRedirect]);
+  
+        const GET_DATA = gql`
+            query GetUsers($username : String!) {
+              users (where: {username: {_eq: $username}}){
+                user_id
+                userGroup
+              }
+            }
+            `;
+      
+      const { loading, error, data } = useQuery(GET_DATA, {
+        variables: {
+          "username": user ? user.name : "default"
+        },
+        fetchPolicy: 'network-only' // Set fetchPolicy to 'network-only' to increase timeout
+      });
 
-    fetchUserData();
-  }, [getIdTokenClaims, isAuthenticated, setUserRole]);
+      if(loading){
+        console.log( 'Loading...');
+      }
+      if(error){
+        console.log(error.cause);
+      }
+      if (data){
+        let users = data['users'];
+        let userID = users[0].user_id;
+        let userGroup = users[0].userGroup;
+        console.log(userID);
+      
 
   return (
     isAuthenticated && (
@@ -39,11 +48,12 @@ const Profile = () => {
         <img src={user.picture} alt={user.name} />
         <h2>{user.name}</h2>
         <p>{user.email}</p>
-        {userId && <p>User ID: {userId}</p>}
-        {userRole && <p>User Role: {userRole}</p>}
+        {userID && <p>User ID: {userID}</p>}
+        {userGroup && <p>User Role: {userGroup}</p>}
       </div>
     )
   );
 };
+}
 
 export default Profile;
