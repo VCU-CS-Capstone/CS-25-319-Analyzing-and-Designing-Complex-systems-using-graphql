@@ -13,14 +13,12 @@
 - Thomas Gyueera - CS - Faculty Advisor
 
 ## 1) Accomplishments this week ##
-   - Do team contract and repo setup	
-
+   - Discussed Tableau desktop vs cloud 
+   - Found weekly meeting time
+	
 ## 2) Milestones to be completed next week ##
-   - Completed team contract and repo setup	
+   - Try free trial of server or cloud and set up Tableau
 
 ## 3) Issues, problems or concerns ##
-   - Changes to the master repo that needed to be merged into our repo
-   - Still need to communicate on meeting times with the sponsor
+   - Need to communicate on meeting times with the advisor
    
-
-

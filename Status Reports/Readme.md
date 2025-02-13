@@ -32,10 +32,10 @@ Status Report Fall Week XX.md is a template for to copy-paste into new Status re
 
 | Document | Tasks | Accomplishments| Issues |
 |---|---|---|---|
-| Week 1 Status Report | | | |
-| Week 2 Status Report | | | |
-| Week 3 Status Report | | | |
-| Week 4 Status Report | | | |
+| Week 1 Status Report | Discussed Tableau desktop vs cloud and Found weekly meeting time | Try free trial of server or cloud and set up Tableau | Still need to communicate on meeting times with the advisor |
+| Week 2 Status Report | Established a connected to Tableau via cData's GraphQL connector to Tableau & We have begun looking at license acquisition for Hasura's Enterprise package & reviewed new team contract  | Get an accurate pricing on the licenses needed & look into other factors of the project| Hasura license prices |
+| Week 3 Status Report | Set up new auth 0 project and got auth 0 and hasura linked together | Get user groups associated with certain table allowances & Fix front end to tables are showing as expected & Remove log in button when logged in | grafana is only possible with switching to hasura DDN option |
+| Week 4 Status Report | Got a new Hasura DDN with mock user data & we have progressed with data governance as far as possible without Hasura-based data & Got group information sent between auth0 and hasura | Need to update new Hasura DDN with larger mock data to be able to visualize & Get new data hosted on new hasura DDN & Get SQL queries to create tables & Get auth0 updated with new hasura information| unavailability of the old Hasura Cloud instance due to the CMSC 508 server being taken down, which hosted our data |
 | Week 5 Status Report | | | |
 | Week 6 Status Report | | | |
 | Week 7 Status Report | | | |

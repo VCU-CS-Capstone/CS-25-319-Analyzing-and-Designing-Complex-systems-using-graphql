@@ -13,14 +13,13 @@
 - Thomas Gyueera - CS - Faculty Advisor
 
 ## 1) Accomplishments this week ##
-   - Do team contract and repo setup	
+  
 
 ## 2) Milestones to be completed next week ##
-   - Completed team contract and repo setup	
+
 
 ## 3) Issues, problems or concerns ##
-   - Changes to the master repo that needed to be merged into our repo
-   - Still need to communicate on meeting times with the sponsor
+
    
 
 

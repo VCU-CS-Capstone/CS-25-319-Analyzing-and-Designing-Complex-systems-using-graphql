@@ -4,7 +4,7 @@
 -  Diya Ram Mohan - CS - Student Team Member
 -  Jayson Urena - CS - Student Team Member
 -  Montel Marks - CS - Student Team Member
--  Houda Lahourz - CS - Student Team Member
+-  Houda Lahrouz - CS - Student Team Member
 
 **Mentor:**
 - Michael Karafotis - Bank of America - Sponsor 

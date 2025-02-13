@@ -13,14 +13,13 @@
 - Thomas Gyueera - CS - Faculty Advisor
 
 ## 1) Accomplishments this week ##
-   - Do team contract and repo setup	
-
+   - Set up new auth 0 project and got auth 0 and hasura linked together
+	
 ## 2) Milestones to be completed next week ##
-   - Completed team contract and repo setup	
-
+  - Get user groups associated with certain table allowances
+  - Fix front end to tables are showing as expected 
+  - Remove log in button when logged in 
+	
 ## 3) Issues, problems or concerns ##
-   - Changes to the master repo that needed to be merged into our repo
-   - Still need to communicate on meeting times with the sponsor
-   
-
+   - grafana is only possible with switching to hasura DDN option. 
 
