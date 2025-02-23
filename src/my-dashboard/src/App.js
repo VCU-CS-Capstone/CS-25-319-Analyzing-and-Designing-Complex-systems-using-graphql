@@ -15,11 +15,11 @@ import { UserRoleProvider } from './UserContext';
 // Auth0 configuration
 const domain = 'dev-aue4pbx1550zv4m3.us.auth0.com';
 const clientId = 'X2iJYUuZWuexN86VhBGxDSd0yl7iW8Nm';
-const audience = 'https://clean-wasp-50.hasura.app/v1/graphql'; // Hasura GraphQL endpoint
+const audience = 'https://mature-lizard-51.hasura.app/v1/graphql'; // Hasura GraphQL endpoint
 const redirectUri = 'http://localhost:3000/';
 
 const httpLink = createHttpLink({
-  uri: 'https://clean-wasp-50.hasura.app/v1/graphql', // Hasura GraphQL endpoint
+  uri: 'https://mature-lizard-51.hasura.app/v1/graphql', // Hasura GraphQL endpoint
 });
 
 // Create an auth link that adds the Auth0 access token to the request headers

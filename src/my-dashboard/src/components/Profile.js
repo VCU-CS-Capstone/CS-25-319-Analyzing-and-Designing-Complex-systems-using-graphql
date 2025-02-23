@@ -12,16 +12,16 @@ const Profile = () => {
       loginWithRedirect(); // Redirect to login if not authenticated
     }
   }, [isAuthenticated, loginWithRedirect]);
-  
+
         const GET_DATA = gql`
             query GetUsers($username : String!) {
-              users (where: {username: {_eq: $username}}){
-                user_id
-                userGroup
+              employees (where: {email: {_eq: $username}}){
+                employeeid
+                departmentid
               }
-            }
-            `;
-      
+            }`
+            ;
+
       const { loading, error, data } = useQuery(GET_DATA, {
         variables: {
           "username": user ? user.name : "default"
@@ -36,11 +36,11 @@ const Profile = () => {
         console.log(error.cause);
       }
       if (data){
-        let users = data['users'];
-        let userID = users[0].user_id;
-        let userGroup = users[0].userGroup;
-        console.log(userID);
-      
+        let employees = data['employees'];
+        let employeeid = employees[0].employeeid;
+        let departmentid = employees[0].departmentid;
+        console.log(employeeid);
+
 
   return (
     isAuthenticated && (
@@ -48,8 +48,8 @@ const Profile = () => {
         <img src={user.picture} alt={user.name} />
         <h2>{user.name}</h2>
         <p>{user.email}</p>
-        {userID && <p>User ID: {userID}</p>}
-        {userGroup && <p>User Role: {userGroup}</p>}
+        {employeeid && <p>User ID: {employeeid}</p>}
+        {departmentid && <p>User Role: {departmentid}</p>}
       </div>
     )
   );
