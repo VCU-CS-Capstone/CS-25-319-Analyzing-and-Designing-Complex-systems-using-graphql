@@ -8,7 +8,7 @@ nav ul.menu {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  display: flex; /* Use flexbox layout */
+  display: flex;
   justify-content: space-between; /* Items spaced evenly */
 }
 
