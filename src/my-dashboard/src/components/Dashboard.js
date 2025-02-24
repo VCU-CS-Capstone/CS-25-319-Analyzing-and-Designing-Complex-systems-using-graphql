@@ -3,38 +3,91 @@ import { useQuery, gql } from '@apollo/client';
 import './Dashboard.css'; // Import the CSS file
 import { Button } from 'react-bootstrap';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useUserRole } from '../UserContext'; // Import the context
+import { Spinner } from 'react-bootstrap';
+import ScrollToTop from "./ScrollToTop";
+
 
 const GET_DATA = gql`
-  query MyQuery($offset: Int!, $limit: Int!){
-  employees(offset: $offset, limit: $limit) {
-    departmentid
-    employeeid
-    department
-    email
-    firstname
-    lastname
+  query MyQuery($employeesOffset: Int!, $transactionsOffset: Int!, $inventoryOffset: Int!, $customersOffset: Int!, $limit: Int!) {
+    employees(offset: $employeesOffset, limit: $limit) {
+      lastname
+      firstname
+      employeeid
+      email
+      departmentid
+      department
+    }
+    employees_aggregate {
+      aggregate {
+        count
+      }
+    }
+    transactions(offset: $transactionsOffset, limit: $limit) {
+      buyerid
+      sellerid
+      totalprice
+      transactiondate
+      transactionid
+    }
+    transactions_aggregate {
+      aggregate {
+        count
+      }
+    }
+    inventory(offset: $inventoryOffset, limit: $limit) {
+      availablequantity
+      itemdescription
+      itemid
+      itemprice
+    }
+    inventory_aggregate {
+      aggregate {
+        count
+      }
+    }
+    customers(offset: $customersOffset, limit: $limit) {
+      phone
+      lastpurchasedate
+      lastname
+      firstname
+      email
+      customerid
+      address
+    }
+    customers_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
-}
 `;
 
 function Dashboard() {
-  const [page, setPage] = useState(1);
-  const limit = 10; // Number of items per page
+  const limit = 8; // Number of items per page
   const tableRef = useRef(null); // Create a ref for the table element
   const { isAuthenticated, loginWithRedirect } = useAuth0(); // Auth0 hook
-  const { userRole } = useUserRole(); // Access userRole from context
-  let totalPages = 1;
+
+  const [employeesPage, setEmployeesPage] = useState(1);
+  const [transactionsPage, setTransactionsPage] = useState(1);
+  const [inventoryPage, setInventoryPage] = useState(1);
+  const [customersPage, setCustomersPage] = useState(1);
 
   const { loading, error, data, fetchMore } = useQuery(GET_DATA, {
     variables: {
-      offset: (page - 1) * limit,
+      employeesOffset: (employeesPage - 1) * limit,
+      transactionsOffset: (transactionsPage - 1) * limit,
+      inventoryOffset: (inventoryPage - 1) * limit,
+      customersOffset: (customersPage - 1) * limit,
       limit: limit
     },
-    fetchPolicy: 'network-only' // Set fetchPolicy to 'network-only' to increase timeout
+    fetchPolicy: 'network-only'
   });
 
-  console.log(data)
+  const [loadingState, setLoadingState] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top on mount
+  }, []);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -49,90 +102,133 @@ function Dashboard() {
   }, [data]);
 
   useEffect(() => {
-    if (page > 1) {
+    if (employeesPage > 1 || transactionsPage > 1 || inventoryPage > 1 || customersPage > 1) {
       fetchMore({
         variables: {
-          offset: (page - 1) * limit,
+          employeesOffset: (employeesPage - 1) * limit,
+          transactionsOffset: (transactionsPage - 1) * limit,
+          inventoryOffset: (inventoryPage - 1) * limit,
+          customersOffset: (customersPage - 1) * limit,
           limit: limit
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
           return {
             ...prev,
-            Table3: fetchMoreResult.Table3,
+            Employees: fetchMoreResult.employees,
           };
         },
       });
     }
-  }, [page, fetchMore, limit]);
-
-  useEffect(() => {
-    const totalEmployeeRows = data?.employees?.aggregate?.totalCount || 0;
-    const totalRows = totalEmployeeRows;
-    const totalPages = Math.ceil(totalRows / limit);
-  
-    if (page < Math.ceil(totalRows / limit)) {
-      fetchMore({
-        variables: {
-          offset: page * limit,
-          limit: limit
-        },
-      });
-    }
-  }, [page, data, fetchMore, limit]);
+  }, [fetchMore, limit, customersPage, employeesPage, inventoryPage, transactionsPage]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
+  const handlePageChange = (tableKey, setPage, newPage) => {
+    setLoadingState(true); 
+  
+    fetchMore({
+      variables: {
+        employeesOffset: (tableKey === 'employees' ? (newPage - 1) * limit : (employeesPage - 1) * limit),
+        transactionsOffset: (tableKey === 'transactions' ? (newPage - 1) * limit : (transactionsPage - 1) * limit),
+        inventoryOffset: (tableKey === 'inventory' ? (newPage - 1) * limit : (inventoryPage - 1) * limit),
+        customersOffset: (tableKey === 'customers' ? (newPage - 1) * limit : (customersPage - 1) * limit),
+        limit: limit,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        setTimeout(() => setLoadingState(false), 500); 
+        return fetchMoreResult || prev;
+      },
+    });
+  
+    setPage(newPage);
+  };
   
 
-  const handlePrevious = () => {
-    setPage(prevPage => Math.max(prevPage - 1, 1));
-  };
-
-  const handleNext = () => {
-    setPage(prevPage => Math.min(prevPage + 1, totalPages));
-  };
+  const tables = [
+    {
+      title: 'Employees',
+      data: data?.employees || [],
+      columns: ['employeeid', 'firstname', 'lastname', 'email', 'department'],
+      page: employeesPage,
+      setPage: setEmployeesPage,
+      totalPages: Math.ceil((data?.employees_aggregate?.aggregate?.count || 0) / limit),
+    },
+    {
+      title: 'Transactions',
+      data: data?.transactions || [],
+      columns: ['transactionid', 'buyerid', 'sellerid', 'totalprice', 'transactiondate'],
+      page: transactionsPage,
+      setPage: setTransactionsPage,
+      totalPages: Math.ceil((data?.transactions_aggregate?.aggregate?.count || 0) / limit),
+    },
+    {
+      title: 'Inventory',
+      data: data?.inventory || [],
+      columns: ['itemid', 'itemdescription', 'availablequantity', 'itemprice'],
+      page: inventoryPage,
+      setPage: setInventoryPage,
+      totalPages: Math.ceil((data?.inventory_aggregate?.aggregate?.count || 0) / limit),
+    },
+    {
+      title: 'Customers',
+      data: data?.customers || [],
+      columns: ['customerid', 'firstname', 'lastname', 'email', 'phone', 'address', 'lastpurchasedate'],
+      page: customersPage,
+      setPage: setCustomersPage,
+      totalPages: Math.ceil((data?.customers_aggregate?.aggregate?.count || 0) / limit),
+    },
+  ]; 
 
   return (
     <div className="center-container">
-      <div className="container" style={{ marginTop: "250px" }}>
-        <div className="card">
-          <div className="card-header">
-            <div className="button-group">
-            </div>
-          </div>
-          <div className="card-body">
-            <div className="table-responsive" style={{ maxHeight: "70vh" }}>
-              <table className="table table-bordered table-striped" ref={tableRef}>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.Table3 && data.Table3.map((item) => (
-                    <tr key={item.id}>
-                      <td>{item.id}</td>
-                      <td>{item.bnb_name}</td>
-                    </tr>
-                  ))}
-                  {data.Table2 && data.Table2.map((item) => (
-                    <tr key={item.id}>
-                      <td>{item.id}</td>
-                      <td>{item.bnb_name}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div className="card-footer text-center">
-            <Button onClick={handlePrevious} disabled={page === 1}>Previous</Button>
-            <span className="page-number">{`Page ${page} of ${totalPages}`}</span>
-            <Button onClick={handleNext} disabled={page === totalPages}>Next</Button>
-          </div>
+      <ScrollToTop/>
+      {loadingState && (
+        <div className="loading-overlay">
+          <Spinner animation="border" variant="primary" />
         </div>
+      )}
+      <div className="container">
+        {tables.map((table) => (
+          <div className="card mb-4" key={table.title}>
+            <div className="card-header">
+              <h3>{table.title}</h3>
+            </div>
+            <div className="card-body">
+              <div className="table-responsive" style={{ maxHeight: '50vh' }}>
+                <table className="table table-bordered table-striped" ref={tableRef}>
+                  <thead>
+                    <tr>
+                      {table.columns.map((col) => (
+                        <th key={col}>{col.toUpperCase()}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {table.data.map((row, idx) => (
+                      <tr key={idx}>
+                        {table.columns.map((col) => (
+                          <td key={col}>{row[col]}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div className="card-footer text-center">
+            <Button onClick={() => handlePageChange(table.key, table.setPage, table.page - 1)} disabled={table.page === 1 || loadingState}>                
+              Previous
+            </Button>
+            <span className="page-number">{`Page ${table.page} of ${table.totalPages}`}</span>
+            <Button onClick={() => handlePageChange(table.key, table.setPage, table.page + 1)} disabled={table.page === table.totalPages || loadingState}>
+              Next
+            </Button>
+            </div>
+          </div>
+        ))
+        }
       </div>
     </div>
   );

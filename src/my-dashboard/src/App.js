@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Profile from './components/Profile';
 import Callback from './components/Callback';
 import Dashboard from './components/Dashboard';
+import Tableau from './components/Tableau';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import './App.css'; // Import the CSS file
@@ -71,11 +72,12 @@ function App() {
           {/* Navigation */}
           <Navbar bg="dark" variant="dark">
             <Container>
-              <Navbar.Brand href="/">AirBnb Data</Navbar.Brand>
+              <Navbar.Brand href="/">CMSC 319 Project</Navbar.Brand>
               <Nav className="me-auto">
                 <Nav.Link as={Link} to="/">Home</Nav.Link>
                 <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                 <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                <Nav.Link as={Link} to="/tableau">Tableau</Nav.Link>
               </Nav>
               <Nav>
                 <LoginButton />
@@ -90,6 +92,7 @@ function App() {
             <Route exact path="/profile" element={<Profile />} />
             <Route exact path="/callback" element={<Callback />} />
             <Route exact path="/dashboard" element={<Dashboard />} />
+            <Route exact path="/tableau" element={<Tableau />} />
           </Routes>
         </div>
         </UserRoleProvider>
