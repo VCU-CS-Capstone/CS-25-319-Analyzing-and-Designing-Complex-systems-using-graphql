@@ -38,8 +38,19 @@ const client = new ApolloClient({
 });
 
 function LoginButton() {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { loginWithRedirect, isAuthenticated, user} = useAuth0();
 
+  if(isAuthenticated){
+    const authLink = setContext((_, { headers }) => {
+      return {
+        headers: {
+          ...headers,
+          "x-hasura-user-id": user['https://hasura.io/jwt/claims']['x-hasura-user-id']
+        },
+      };
+    });
+    client.setLink(authLink.concat(httpLink))
+  }
   return (
     <Button variant="primary" onClick={() => loginWithRedirect()} disabled={isAuthenticated}>
       {isAuthenticated ? 'Logged In' : 'Log In'}
