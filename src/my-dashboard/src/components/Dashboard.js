@@ -180,7 +180,7 @@ function Dashboard() {
       totalPages: Math.ceil((data?.customers_aggregate?.aggregate?.count || 0) / limit),
     },
   ]; 
-
+  
   return (
     <div className="center-container">
       <ScrollToTop/>
@@ -190,7 +190,7 @@ function Dashboard() {
         </div>
       )}
       <div className="container">
-        {tables.map((table) => (
+        {tables.filter(table => table.data.length>0).map((table) => (
           <div className="card mb-4" key={table.title}>
             <div className="card-header">
               <h3>{table.title}</h3>
