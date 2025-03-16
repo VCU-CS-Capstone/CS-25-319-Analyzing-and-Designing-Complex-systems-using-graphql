@@ -25,7 +25,7 @@ const Home = () => {
       <h3 className="fade-in">Key Issues Addressed (Updated as the project progresses):</h3>
 
       <p className="fade-in">
-        <strong>Data Visualization:</strong> Employees lacked proper visualization tools to interact with data.
+        <strong>Data Visualization:</strong> Employees need proper visualization tools to interact with data.
         We addressed this by setting up Tableau with a free trial to ensure cost efficiency, and 
         integrated Tableau via cData’s GraphQL connector for seamless data visualization.
       </p>

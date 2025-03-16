@@ -13,13 +13,15 @@
 - Thomas Gyueera - CS - Faculty Advisor
 
 ## 1) Accomplishments this week ##
-  
+  * Got data hosted in neon done, got it up on ddn as well (but only locally available) 
+  * Grafana can only be done locally 
+  * Got new user creation set up with new hasura 
+got data on neon 
 
 ## 2) Milestones to be completed next week ##
-  
+  * Fix error with authorization when querying into new hasura 
 
 ## 3) Issues, problems or concerns ##
-
-   
+Error with authorization when querying into new hasura 
 
 
