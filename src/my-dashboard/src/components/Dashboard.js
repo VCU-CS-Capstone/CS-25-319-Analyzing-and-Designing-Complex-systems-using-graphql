@@ -6,71 +6,81 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Spinner } from 'react-bootstrap';
 import ScrollToTop from "./ScrollToTop";
 
-
-const GET_DATA = gql`
-  query MyQuery($employeesOffset: Int!, $transactionsOffset: Int!, $inventoryOffset: Int!, $customersOffset: Int!, $limit: Int!) {
-    employees(offset: $employeesOffset, limit: $limit) {
-      lastname
-      firstname
-      employeeid
-      email
-      departmentid
-      department
-    }
-    employees_aggregate {
-      aggregate {
-        count
-      }
-    }
-    transactions(offset: $transactionsOffset, limit: $limit) {
-      buyerid
-      sellerid
-      totalprice
-      transactiondate
-      transactionid
-    }
-    transactions_aggregate {
-      aggregate {
-        count
-      }
-    }
-    inventory(offset: $inventoryOffset, limit: $limit) {
-      availablequantity
-      itemdescription
-      itemid
-      itemprice
-    }
-    inventory_aggregate {
-      aggregate {
-        count
-      }
-    }
-    customers(offset: $customersOffset, limit: $limit) {
-      phone
-      lastpurchasedate
-      lastname
-      firstname
-      email
-      customerid
-      address
-    }
-    customers_aggregate {
-      aggregate {
-        count
-      }
-    }
-  }
-`;
-
 function Dashboard() {
   const limit = 8; // Number of items per page
   const tableRef = useRef(null); // Create a ref for the table element
-  const { isAuthenticated, loginWithRedirect } = useAuth0(); // Auth0 hook
+  const { isAuthenticated, loginWithRedirect, user } = useAuth0(); // Auth0 hook
+
+  let role;
+  let id = '0';
+
+  if(user){
+    role = user["https://hasura.io/jwt/claims"]["x-hasura-role"]
+    id = user['https://hasura.io/jwt/claims']['x-hasura-user-id']
+
+    console.log(role)
+  }
+  else{
+    loginWithRedirect();
+  }
+
+    const GET_DATA = gql`
+    query GetData(
+      $employeesOffset: Int, $transactionsOffset: Int,
+      $inventoryOffset: Int, $customersOffset: Int, $limit: Int, $id: String
+    ) {
+      ${role === "HR_Manager" || role === "HR_Employee" ? `
+        employees(offset: $employeesOffset, limit: $limit) {
+          employeeid firstname lastname email department
+        }
+        employees_aggregate { aggregate { count } }
+      ` : role === "Sales_Manager" ? `
+        employees(where: { departmentid: { _eq: "102" } }, offset: $employeesOffset, limit: $limit) {
+          employeeid firstname lastname email department
+        }
+        employees_aggregate(where: { departmentid: { _eq: "102" } }) { aggregate { count } }
+      ` : role === "IT_Manager" ? `
+        employees(offset: $employeesOffset, limit: $limit) {
+          employeeid firstname lastname email department
+        }
+        employees_aggregate(where: { departmentid: { _eq: "103" } }) { aggregate { count } }
+      ` : `
+        employees(where: { employeeid: { _eq: $id } }) {
+          employeeid firstname lastname email department
+        }
+        employees_aggregate() { aggregate { count } }
+      `}      
+      
+      ${["guest", "host", "Sales_Manager", "Sales_Employee",].includes(role) ? `
+        transactions(offset: $transactionsOffset, limit: $limit) {
+          transactionid buyerid sellerid totalprice transactiondate
+        }
+        transactions_aggregate { aggregate { count } }
+      ` : ""}
+
+      ${["guest", "host", "IT_Manager", "IT_Employee"].includes(role) ? `
+        inventory(offset: $inventoryOffset, limit: $limit) {
+          itemid itemdescription availablequantity itemprice
+        }
+        inventory_aggregate { aggregate { count } }
+      ` : ""}
+
+      ${["guest", "host", "Sales_Manager", "Sales_Employee"].includes(role) ? `
+        customers(offset: $customersOffset, limit: $limit) {
+          customerid firstname lastname email phone address lastpurchasedate
+        }
+        customers_aggregate { aggregate { count } }
+      ` : ""}
+    }
+  `;
+
 
   const [employeesPage, setEmployeesPage] = useState(1);
   const [transactionsPage, setTransactionsPage] = useState(1);
   const [inventoryPage, setInventoryPage] = useState(1);
   const [customersPage, setCustomersPage] = useState(1);
+
+
 
   const { loading, error, data, fetchMore } = useQuery(GET_DATA, {
     variables: {
@@ -78,10 +88,13 @@ function Dashboard() {
       transactionsOffset: (transactionsPage - 1) * limit,
       inventoryOffset: (inventoryPage - 1) * limit,
       customersOffset: (customersPage - 1) * limit,
-      limit: limit
+      limit: limit,
+      id: id
     },
     fetchPolicy: 'network-only'
   });
+
+  console.log(data)
 
   const [loadingState, setLoadingState] = useState(false);
 
