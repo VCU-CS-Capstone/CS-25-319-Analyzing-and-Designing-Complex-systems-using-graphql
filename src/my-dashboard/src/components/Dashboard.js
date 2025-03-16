@@ -45,27 +45,27 @@ function Dashboard() {
         }
         employees_aggregate(where: { departmentid: { _eq: "103" } }) { aggregate { count } }
       ` : `
-        employees(where: { employeeid: { _eq: $id } }) {
+        employees {
           employeeid firstname lastname email department
         }
-        employees_aggregate() { aggregate { count } }
+        employees_aggregate { aggregate { count } }
       `}      
       
-      ${["guest", "host", "Sales_Manager", "Sales_Employee",].includes(role) ? `
+      ${["host", "Sales_Manager", "Sales_Employee",].includes(role) ? `
         transactions(offset: $transactionsOffset, limit: $limit) {
           transactionid buyerid sellerid totalprice transactiondate
         }
         transactions_aggregate { aggregate { count } }
       ` : ""}
 
-      ${["guest", "host", "IT_Manager", "IT_Employee"].includes(role) ? `
+      ${["host", "IT_Manager", "IT_Employee"].includes(role) ? `
         inventory(offset: $inventoryOffset, limit: $limit) {
           itemid itemdescription availablequantity itemprice
         }
         inventory_aggregate { aggregate { count } }
       ` : ""}
 
-      ${["guest", "host", "Sales_Manager", "Sales_Employee"].includes(role) ? `
+      ${["host", "Sales_Manager", "Sales_Employee"].includes(role) ? `
         customers(offset: $customersOffset, limit: $limit) {
           customerid firstname lastname email phone address lastpurchasedate
         }
