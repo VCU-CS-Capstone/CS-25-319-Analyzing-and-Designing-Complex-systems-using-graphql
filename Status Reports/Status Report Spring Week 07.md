@@ -13,13 +13,16 @@
 - Thomas Gyueera - CS - Faculty Advisor
 
 ## 1) Accomplishments this week ##
-  
+ * Fixed authentication error 
+ * Got tables showing with pagination 
+ * We updated Profile view 
+ * Updating hasura profiles to have user (only access to your employee information within employee table), manager (limited table access), ceo (all tables all views).
 
 ## 2) Milestones to be completed next week ##
-
+  * Look into add more fields into log in
+  * Find out how to get hasura and auth0 roles automatically matched up 
 
 ## 3) Issues, problems or concerns ##
-
-   
+ N/A
 
 
